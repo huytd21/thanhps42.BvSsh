@@ -42,12 +42,11 @@ namespace thanhps42.BvSsh
                 ShowStatus();
                 bvssh = new Process();
                 bvssh.StartInfo.FileName = bvsshExe;
-                bvssh.StartInfo.Arguments = string.Format("-profile=\"{0}\" -hide=main -hide=auth,popups,banner,trayIcon", bvsshProfile);
+                //bvssh.StartInfo.Arguments = string.Format("-profile=\"{0}\" -hide=main -hide=auth,popups,banner,trayIcon", bvsshProfile);
+                bvssh.StartInfo.Arguments = string.Format("-profile=\"{0}\" -hide=auth,popups,banner,trayIcon", bvsshProfile);
                 bvssh.StartInfo.WindowStyle = ProcessWindowStyle.Minimized;
                 bvssh.Start();
                 bvssh.WaitForInputIdle();
-                lock (Sync.oAutoIt)
-                    AutoItX.ControlHide(bvssh.MainWindowHandle, GetHandle(Controlnfo.LOG));
                 return true;
             }
             catch
@@ -57,6 +56,8 @@ namespace thanhps42.BvSsh
         }
         public bool Login(string host, string username, string password, int portFw, int timeOut = 20)
         {
+            if (bvssh == null || bvssh.HasExited)
+                Start();
             Counter.Login++;
             if (Counter.Login % 50 == 0)
             {
