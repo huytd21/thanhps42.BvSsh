@@ -183,6 +183,7 @@ namespace thanhps42.BvSsh
             try
             {
                 status = "Logging out...";
+                _connectStatus = ConnectStatus.Unconnected;
                 ShowStatus();
                 IntPtr hwndLogin = GetHandle(Controlnfo.Login);
                 string btnLoginText = GetControlText(hwndLogin);
@@ -205,10 +206,6 @@ namespace thanhps42.BvSsh
             catch
             {
                 Kill();
-            }
-            finally
-            {
-                _connectStatus = ConnectStatus.Unconnected;
             }
         }
 
@@ -299,7 +296,7 @@ namespace thanhps42.BvSsh
         {
             lock (Sync.oAutoIt)
             {
-                AutoItX.ControlFocus(_bvssh.MainWindowHandle, hwnd);
+                //AutoItX.ControlFocus(_bvssh.MainWindowHandle, hwnd);
                 AutoItX.ControlClick(_bvssh.MainWindowHandle, hwnd);
             }
         }
