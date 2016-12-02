@@ -50,10 +50,20 @@ namespace thanhps42.BvSsh
         {
             get
             {
-                return IPGlobalProperties.GetIPGlobalProperties().GetActiveTcpListeners()
-                    .Any(x => x.Port == _lastListenPort);
+                try
+                {
+                    return IPGlobalProperties.GetIPGlobalProperties().GetActiveTcpListeners()
+                        .Any(x => x.Port == _lastListenPort);
+                }
+                catch
+                {
+                    return true;
+                }
+                
             }
         }
+
+        public bool MonitorConnection { get; set; }
 
         #endregion -- Properties --
 
@@ -149,7 +159,7 @@ namespace thanhps42.BvSsh
                 _connectStatus = ConnectStatus.Connected;
                 status = string.Format("LIVE {0} | {1} | {2}", host, username, password);
                 ShowStatus();
-                new Thread(DisconnectChecker) { IsBackground = true }.Start();
+                if (MonitorConnection) new Thread(DisconnectChecker) { IsBackground = true }.Start();
                 return true;
             }
 
