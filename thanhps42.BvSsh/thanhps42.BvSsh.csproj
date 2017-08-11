@@ -30,8 +30,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="AutoItX3.Assembly">
-      <HintPath>..\..\AutoItX\AutoItX3.Assembly.dll</HintPath>
+    <Reference Include="AutoItX3.Assembly, Version=3.0.0.0, Culture=neutral, PublicKeyToken=a646454c8d475470, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>.\AutoItX3.Assembly.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -48,6 +49,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StringHelper.cs" />
     <Compile Include="Sync.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="AutoItX3.Assembly.dll" />
+    <Content Include="AutoItX3.dll" />
   </ItemGroup>
   <ItemGroup>
     <COMReference Include="AutoItX3Lib">
